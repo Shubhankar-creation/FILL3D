@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -10,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float rotationSensitivity;
 
     private Touch touch;
-    private void Update()
+    private void FixedUpdate()
     {
         transform.Translate(Vector3.forward * forwardSpeed * Time.deltaTime);
 
