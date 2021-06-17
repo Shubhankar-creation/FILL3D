@@ -1,13 +1,29 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
 
+    private MeshRenderer meshRenderer;
+    private Touch touch;
+
     public float forwardSpeed;
     public float Sensitivity;
     public float rotationSensitivity;
 
-    private Touch touch;
+    public Material[] playerColor;
+    public float changeColorTime;
+    private int currInd;
+
+    private void Start()
+    {
+        currInd = Random.Range(0, playerColor.Length);
+        meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer.material = playerColor[currInd];
+
+        StartCoroutine(waitTOChangeColor());
+    }
     private void FixedUpdate()
     {
         transform.Translate(Vector3.forward * forwardSpeed * Time.deltaTime);
@@ -30,6 +46,26 @@ public class PlayerMovement : MonoBehaviour
                 // Rotating the player based on sidewaysMovement
                 transform.Rotate(Vector3.up * touch.deltaPosition.x / ( rotationSensitivity * 10 + 10));
             }
+        }
+    }
+
+    IEnumerator waitTOChangeColor()
+    {
+        yield return new WaitForSeconds(changeColorTime);
+        changeColor();
+        StartCoroutine(waitTOChangeColor());
+    }
+    void changeColor()
+    {
+        randomIndex(currInd);
+        meshRenderer.material = playerColor[currInd];
+    }
+
+    void randomIndex(int i)
+    {
+        while(i == currInd)
+        {
+            currInd = Random.Range(0, playerColor.Length);
         }
     }
 }
