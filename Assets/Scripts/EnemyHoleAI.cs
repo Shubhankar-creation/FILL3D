@@ -17,6 +17,7 @@ public class EnemyHoleAI : MonoBehaviour
     private void Update()
     {
         float distance = Vector3.Distance(transform.position, playerShape.transform.position);
+        transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
 
         Debug.Log(distance);
 

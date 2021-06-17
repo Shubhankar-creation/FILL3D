@@ -150,7 +150,7 @@ Transform:
   m_GameObject: {fileID: 71739714}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.02, z: 1}
+  m_LocalScale: {x: 1, y: 0.0005, z: 1}
   m_Children: []
   m_Father: {fileID: 933276735}
   m_RootOrder: 0
@@ -675,7 +675,6 @@ GameObject:
   - component: {fileID: 933276736}
   - component: {fileID: 933276739}
   - component: {fileID: 933276738}
-  - component: {fileID: 933276737}
   m_Layer: 0
   m_Name: HoleParent
   m_TagString: Untagged
@@ -691,7 +690,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 933276734}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 7.13}
+  m_LocalPosition: {x: 0, y: 0, z: 11.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 71739715}
@@ -713,19 +712,6 @@ MonoBehaviour:
   ground2dCollider: {fileID: 1659844399}
   hole2dCollider: {fileID: 1888455886}
   GeneratedMeshCollider: {fileID: 2015165340}
---- !u!114 &933276737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 933276734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c514177074c5f447a184bb61d7b558e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mobDistance: 20
 --- !u!195 &933276738
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -6486,7 +6472,7 @@ GameObject:
   - component: {fileID: 2079133836}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
