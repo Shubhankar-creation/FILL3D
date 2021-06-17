@@ -6130,10 +6130,6 @@ MonoBehaviour:
   Sensitivity: 0.005
   rotationSensitivity: 0.5
   playerColor:
-  - {fileID: 2100000, guid: 0f8179943846f0540a7203401045a733, type: 2}
-  - {fileID: 2100000, guid: b5b558ac6f5c80d409c90c576ba3e64f, type: 2}
-  - {fileID: 2100000, guid: cf67d65d75eeaa74bb0ed62188f44485, type: 2}
-  - {fileID: 2100000, guid: a524c6536560d004f8aa1db9af650288, type: 2}
   - {fileID: 2100000, guid: 30f72cce04434fa4d973f49b1b3763fe, type: 2}
   - {fileID: 2100000, guid: 4f19ff8e3add28a42b1b6f43aa28306f, type: 2}
   changeColorTime: 2
