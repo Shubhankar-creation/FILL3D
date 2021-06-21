@@ -6,6 +6,12 @@ TagManager:
   tags:
   - AllyShape
   - EnemyShape
+  - HoleInstance
+  - SpawnCollider
+  - FrontSpawn
+  - RightSpanw
+  - LeftSpawn
+  - BackSpawn
   layers:
   - Default
   - TransparentFX

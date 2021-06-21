@@ -38,6 +38,17 @@ public class HoleCreation : MonoBehaviour
         }
     }
 
+    
+
+
+
+
+
+
+
+
+
+
     private void Instantiate2dGOs(int index)
     {
         Collider2dTo3d = new GameObject(); Collider2dTo3d.name = "Collider2dTo3d";
@@ -90,8 +101,6 @@ public class HoleCreation : MonoBehaviour
     {
         Hole2D = new GameObject();
         Hole2D.name = "" + index;
-        string name = "1000";
-        Debug.Log(int.Parse(name));
         HoleCol = Hole2D.AddComponent<PolygonCollider2D>();
         Hole2D.transform.parent = Collider2dTo3d.transform;
     }
