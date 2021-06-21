@@ -1,45 +1,98 @@
 using UnityEngine;
 using UnityEngine.AI;
+
 public class HoleCreation : MonoBehaviour
 {
-    public PolygonCollider2D ground2dCollider;
-    public PolygonCollider2D hole2dCollider;
-    public MeshCollider GeneratedMeshCollider;
+    private GameObject HoleParent;
+    private GameObject Collider2dTo3d;
+    private GameObject ground2D;
+    private GameObject Hole2D;
+    private GameObject Coll3Dmesh;
 
-    private Mesh GenertateMesh;
+    public int totalholes = 1;
 
+    PolygonCollider2D groundCol;
+    PolygonCollider2D HoleCol;
+    MeshCollider Mesh3DColl;
+    private HoleMovement holeMove;
+
+
+    public GameObject HoleShape;
+
+    private Vector2[] polyPoint = {new Vector2(10f,10f),
+                            new Vector2(-10f,10f),
+                            new Vector2(-10f,-10f),
+                            new Vector2(10f,-10f)};
     private void Start()
     {
-        hole2dCollider.transform.position = new Vector2(transform.position.x, transform.position.z);
-    }
-    private void FixedUpdate()
-    {
-        if(transform.hasChanged == true)
+        Ground2dCol();
+        Mesh3DCol();
+        for (int i = 0; i < 4; i++)
         {
-            transform.hasChanged = false;
-            hole2dCollider.transform.position = new Vector2(transform.position.x, transform.position.z);
+            Instantiate2dGOs(i);
+            AddingHoleComponents(i);
         }
-        make2dHole();
-        make2dTo3dCollider();
     }
-    void make2dHole()
+
+    private void Instantiate2dGOs(int index)
     {
-        Vector2[] pointPositon = hole2dCollider.GetPath(0);
+        Collider2dTo3d = new GameObject(); Collider2dTo3d.name = "Collider2dTo3d";
+        Collider2dTo3d.transform.parent = transform;
 
-        for(int i =0; i < pointPositon.Length; i++)
-        {
-            pointPositon[i] = (Vector2)hole2dCollider.transform.TransformPoint(pointPositon[i]);
-        }
+        Hole2dCol(index);
 
-        ground2dCollider.pathCount = 2;
-        ground2dCollider.SetPath(1, pointPositon);
     }
-    void make2dTo3dCollider()
+    private void AddingHoleComponents(int index)
     {
-        if (GenertateMesh != null) Destroy(GenertateMesh);
-        GenertateMesh = ground2dCollider.CreateMesh(true, true);
-        GeneratedMeshCollider.sharedMesh = GenertateMesh;
+        HoleParent = new GameObject(); HoleParent.name = "HoleParent";
+        HoleParent.transform.parent = transform;
 
+        MovementHoleComponent();
+
+        GameObject newHole = Instantiate(HoleShape, transform.position, Quaternion.identity) as GameObject;
+        newHole.transform.parent = HoleParent.transform;
+    }
+
+    void MovementHoleComponent()
+    {
+        holeMove = HoleParent.AddComponent<HoleMovement>();
+        HoleParent.AddComponent<EnemyFollow>();
+        HoleParent.AddComponent<NavMeshAgent>();
+
+        holeMove.Hole2dCollider = HoleCol;
+        holeMove.Ground2dCollider = groundCol;
+        holeMove.GeneratedMeshCollider = Mesh3DColl;
+    }
+
+
+    void Ground2dCol()
+    {
+        ground2D = new GameObject();
+        ground2D.name = "Ground2D";
+        groundCol = ground2D.AddComponent<PolygonCollider2D>();
+        groundPolySet(groundCol);
+    }
+
+    void Hole2dCol(int index)
+    {
+        Hole2D = new GameObject();
+        Hole2D.name = "" + index;
+        string name = "1000";
+        Debug.Log(int.Parse(name));
+        HoleCol = Hole2D.AddComponent<PolygonCollider2D>();
+        Hole2D.transform.parent = Collider2dTo3d.transform;
+    }
+
+    void Mesh3DCol()
+    {
+        Coll3Dmesh = new GameObject();
+        Coll3Dmesh.name = "3dMeshColl";
+        Mesh3DColl = Coll3Dmesh.AddComponent<MeshCollider>();
+        Coll3Dmesh.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+    }
+    void groundPolySet(PolygonCollider2D ground2dCol)
+    {
+        ground2dCol.SetPath(0, polyPoint);
     }
 }
 
