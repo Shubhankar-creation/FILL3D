@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class EnemyFollow : MonoBehaviour
 {
     private NavMeshAgent Mob;
-    public GameObject Player;
+    private GameObject Player;
 
     public float mobDistance = 3f;
 
@@ -14,12 +14,6 @@ public class EnemyFollow : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    private void FixedUpdate()
-    {
-        Mob.transform.position = new Vector3(Mob.transform.position.x,
-            0f,
-            Mob.transform.position.z);
-    }
     private void Update()
     {
         float distance = Vector3.Distance(Player.transform.position, transform.position);

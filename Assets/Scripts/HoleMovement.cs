@@ -9,16 +9,14 @@ public class HoleMovement : MonoBehaviour
     Mesh GenerateMesh;
     private void FixedUpdate()
     {
-
         if (transform.hasChanged == true)
         {
             transform.hasChanged = false;
             Hole2dCollider.transform.position = new Vector2(transform.position.x, transform.position.z);
             Hole2dCollider.transform.localScale = transform.localScale * initalScale;
             Make2dHole(int.Parse(Hole2dCollider.name));
+            Make3dMeshCollider();
         }
-        Make3dMeshCollider();
-
     }
 
     void Make2dHole(int index)
