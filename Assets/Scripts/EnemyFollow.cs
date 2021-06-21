@@ -4,13 +4,13 @@ using UnityEngine.AI;
 public class EnemyFollow : MonoBehaviour
 {
     private NavMeshAgent Mob;
-    private GameObject Player;
+    public GameObject Player;
 
-    public float mobDistance = 3f;
-
+    private HoleCreation HCreate;
     private void Start()
     {
-        Mob = gameObject.GetComponent<NavMeshAgent>();
+        HCreate = GameObject.FindGameObjectWithTag("HoleInstance").GetComponent<HoleCreation>();
+        Mob = GetComponent<NavMeshAgent>();
         Player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -18,7 +18,7 @@ public class EnemyFollow : MonoBehaviour
     {
         float distance = Vector3.Distance(Player.transform.position, transform.position);
 
-        if (distance < mobDistance)
+        if (distance < HCreate.modDistance)
         {
             Vector3 dirToPlayer = transform.position - Player.transform.position;
             Vector3 newPos = transform.position - dirToPlayer;

@@ -8,8 +8,12 @@ public class HoleCreation : MonoBehaviour
     private GameObject ground2D;
     private GameObject Hole2D;
     private GameObject Coll3Dmesh;
+    private NavMeshAgent navMeshAgent;
 
-    public int totalholes = 1;
+    private float xVal, zVal;
+
+    public float enemyFollowSpeed = 1.5f, modDistance = 10f;
+
 
     PolygonCollider2D groundCol;
     PolygonCollider2D HoleCol;
@@ -46,18 +50,27 @@ public class HoleCreation : MonoBehaviour
     {
         HoleParent = new GameObject(); HoleParent.name = "HoleParent";
         HoleParent.transform.parent = transform;
-
+        randomPos();
+        HoleParent.transform.position = new Vector3(xVal, HoleParent.transform.position.y, zVal);
         MovementHoleComponent();
 
-        GameObject newHole = Instantiate(HoleShape, transform.position, Quaternion.identity) as GameObject;
+        GameObject newHole = Instantiate(HoleShape, HoleParent.transform.position, Quaternion.identity) as GameObject;
         newHole.transform.parent = HoleParent.transform;
+    }
+
+    void randomPos()
+    {
+        xVal = Random.Range(0f, 10f);
+        zVal = Random.Range(0f, 10f);
     }
 
     void MovementHoleComponent()
     {
         holeMove = HoleParent.AddComponent<HoleMovement>();
         HoleParent.AddComponent<EnemyFollow>();
-        HoleParent.AddComponent<NavMeshAgent>();
+        navMeshAgent = HoleParent.AddComponent<NavMeshAgent>();
+        navMeshAgent.speed = enemyFollowSpeed;
+
 
         holeMove.Hole2dCollider = HoleCol;
         holeMove.Ground2dCollider = groundCol;
