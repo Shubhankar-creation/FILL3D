@@ -23,30 +23,20 @@ public class HoleCreation : MonoBehaviour
 
     public GameObject HoleShape;
 
-    private Vector2[] polyPoint = {new Vector2(10f,10f),
-                            new Vector2(-10f,10f),
-                            new Vector2(-10f,-10f),
-                            new Vector2(10f,-10f)};
+    private Vector2[] polyPoint = {new Vector2(30f,30f),
+                            new Vector2(-30f,30f),
+                            new Vector2(-30f,-30f),
+                            new Vector2(30f,-30f)};
     private void Start()
     {
         Ground2dCol();
         Mesh3DCol();
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 2; i++)
         {
             Instantiate2dGOs(i);
             AddingHoleComponents(i);
         }
     }
-
-    
-
-
-
-
-
-
-
-
 
 
     private void Instantiate2dGOs(int index)
@@ -71,8 +61,8 @@ public class HoleCreation : MonoBehaviour
 
     void randomPos()
     {
-        xVal = Random.Range(0f, 10f);
-        zVal = Random.Range(0f, 10f);
+        xVal = Random.Range(0f, 30f);
+        zVal = Random.Range(0f, 30f);
     }
 
     void MovementHoleComponent()

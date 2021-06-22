@@ -9,9 +9,10 @@ TagManager:
   - HoleInstance
   - SpawnCollider
   - FrontSpawn
-  - RightSpanw
   - LeftSpawn
   - BackSpawn
+  - RightSpawn
+  - Ground
   layers:
   - Default
   - TransparentFX
