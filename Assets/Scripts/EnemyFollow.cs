@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,11 +8,12 @@ public class EnemyFollow : MonoBehaviour
     public GameObject Player;
     public float enemySpeed = 1.5f;
 
-    public float mobDistance = 20f;
+    public float mobDistance = 15f;
 
     private void Start()
     {
         Mob = gameObject.GetComponent<NavMeshAgent>();
+        Mob.speed = enemySpeed;
         Player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -21,10 +23,11 @@ public class EnemyFollow : MonoBehaviour
 
         if (distance < mobDistance)
         {
+
             Vector3 dirToPlayer = transform.position - Player.transform.position;
             Vector3 newPos = transform.position - dirToPlayer;
-            Mob.speed = enemySpeed;
             Mob.SetDestination(new Vector3(newPos.x, 0f, newPos.z));
         }
     }
 }
+

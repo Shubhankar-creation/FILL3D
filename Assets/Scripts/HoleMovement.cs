@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class HoleMovement : MonoBehaviour
@@ -8,10 +9,12 @@ public class HoleMovement : MonoBehaviour
     float initalScale = 1f;
     Mesh GenerateMesh;
 
+    private GameObject childHoleCol;
     private SpawnDetection shapeSpawn;
 
     private void Start()
     {
+        childHoleCol = this.transform.GetChild(0).gameObject;
         shapeSpawn = GameObject.FindGameObjectWithTag("Player").GetComponent<SpawnDetection>();
     }
     private void Update()
@@ -20,8 +23,11 @@ public class HoleMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+
         if (transform.hasChanged == true)
         {
+
+            setChildPos();
             transform.hasChanged = false;
             Hole2dCollider.transform.position = new Vector2(transform.position.x, transform.position.z);
             Hole2dCollider.transform.localScale = transform.localScale * initalScale;
@@ -30,6 +36,14 @@ public class HoleMovement : MonoBehaviour
         }
     }
 
+
+    void setChildPos()
+    {
+        childHoleCol.transform.position = Vector3.Lerp(childHoleCol.transform.position, 
+            new Vector3(Ground2dCollider.transform.position.x - 4f, Ground2dCollider.transform.position.y, Ground2dCollider.transform.position.z - 5f), 
+            0.01f);
+
+    }
     void Make2dHole(int index)
     {
         Vector2[] pointPosition = Hole2dCollider.GetPath(0);

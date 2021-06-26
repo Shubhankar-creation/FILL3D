@@ -8,7 +8,7 @@ public class HoleCreation : MonoBehaviour
     private GameObject ground2D;
     private GameObject Hole2D;
     private GameObject Coll3Dmesh;
-
+    private GameObject hole3dparent;
     public float xVal, zVal;
     private SpawnDetection respawnColDetect;
 
@@ -20,10 +20,10 @@ public class HoleCreation : MonoBehaviour
 
     public GameObject HoleShape;
 
-    private Vector2[] polyPoint = {new Vector2(10f, 15f),
-                            new Vector2(-10f, 15f),
-                            new Vector2(-10f, -15f),
-                            new Vector2(10f, -15f)};
+    private Vector2[] polyPoint = {new Vector2(15f, 15f),
+                            new Vector2(-15f, 15f),
+                            new Vector2(-15f, -15f),
+                            new Vector2(15f, -15f)};
     private void Start()
     {
         respawnColDetect = GameObject.FindGameObjectWithTag("Player").GetComponent<SpawnDetection>();
@@ -58,10 +58,32 @@ public class HoleCreation : MonoBehaviour
 
     void setPolyPoints()
     {
-        polyPoint[2] = polyPoint[1];
-        polyPoint[3] = polyPoint[0];
-        polyPoint[0] = new Vector2(respawnColDetect.posXVal + 10f, respawnColDetect.posZVal + 15f);
-        polyPoint[1] = new Vector2(-(respawnColDetect.posXVal + 10f), respawnColDetect.posZVal + 15f);
+
+        if(respawnColDetect.frontSpawn)
+        {
+            polyPoint[2] = polyPoint[1];
+            polyPoint[3] = polyPoint[0];
+            polyPoint[0] = new Vector2(-(respawnColDetect.posXVal + 15f), respawnColDetect.posZVal + 15f);
+            polyPoint[1] = new Vector2(-(respawnColDetect.posXVal + 15f), respawnColDetect.posZVal + 15f);
+            respawnColDetect.frontSpawn = false;
+        }
+        else if(respawnColDetect.leftSpawan)
+        {
+            polyPoint[0] = polyPoint[1];
+            polyPoint[3] = polyPoint[2];
+            polyPoint[0] = new Vector2(-(respawnColDetect.posXVal + 15f), respawnColDetect.posZVal + 15f);
+            polyPoint[3] = new Vector2(-(respawnColDetect.posXVal + 15f), -(respawnColDetect.posZVal + 15f));
+            respawnColDetect.frontSpawn = false;
+        }
+        else if (respawnColDetect.leftSpawan)
+        {
+            polyPoint[1] = polyPoint[0];
+            polyPoint[2] = polyPoint[3];
+            polyPoint[1] = new Vector2(respawnColDetect.posXVal + 15f, respawnColDetect.posZVal + 15f);
+            polyPoint[2] = new Vector2(respawnColDetect.posXVal + 15f, -(respawnColDetect.posZVal + 15f));
+            respawnColDetect.frontSpawn = false;
+        }
+
     }
     void Ground2dCol()
     {
@@ -130,12 +152,9 @@ public class HoleCreation : MonoBehaviour
         randomPos();
         HoleParent.transform.position = new Vector3(xVal, 0f, zVal);
 
-        Debug.Log("Hole Parent LocalPositon val is  " + HoleParent.transform.localPosition);
-        Debug.Log("Hole Parent Positon val is  " + HoleParent.transform.position);
-
         // creating GO for detection
 
-        GameObject hole3dparent = new GameObject("HoleDeactivate");
+        hole3dparent = new GameObject("HoleDeactivate");
         hole3dparent.tag = "HoleDelete";
         hole3dparent.transform.position = ground2D.transform.position;
 
@@ -154,13 +173,13 @@ public class HoleCreation : MonoBehaviour
         
         if(xVal < 0)
         {
-            xVal = Random.Range(respawnColDetect.posXVal, respawnColDetect.posXVal + 7.5f);
-            zVal = Random.Range(respawnColDetect.posZVal, respawnColDetect.posZVal + 7.5f);
+            xVal = Random.Range(respawnColDetect.posXVal, respawnColDetect.posXVal + 15f);
+            zVal = Random.Range(respawnColDetect.posZVal, respawnColDetect.posZVal + 15f);
         }
         else
         {
-            xVal = respawnColDetect.posXVal - Random.Range(0f, 7.5f);
-            zVal = respawnColDetect.posZVal - Random.Range(0f, 7.5f);
+            xVal = respawnColDetect.posXVal - Random.Range(0f, 15f);
+            zVal = respawnColDetect.posZVal - Random.Range(0f, 15f);
         }
 
     }

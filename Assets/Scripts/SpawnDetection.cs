@@ -3,6 +3,10 @@ using UnityEngine;
 public class SpawnDetection : MonoBehaviour
 {
     public bool canInstantiate;
+    public bool frontSpawn;
+    public bool leftSpawan;
+    public bool rightSpawn;
+
     public float posZVal, posXVal;
 
     private void Start()
@@ -15,20 +19,20 @@ public class SpawnDetection : MonoBehaviour
         if (other.gameObject.CompareTag("FrontSpawn"))
         {
             canInstantiate = true;
-            Debug.Log("Hole Creation " + canInstantiate);
             posZVal += 30f;
+            frontSpawn = true;
         }
         else if (other.gameObject.CompareTag("LeftSpawn"))
         {
             canInstantiate = true;
-            Debug.Log("Hole Creation " + canInstantiate);
-            posXVal -= 20f;
+            posXVal -= 30f;
+            leftSpawan = true;
         }
         else if (other.gameObject.CompareTag("RightSpawn"))
         {
             canInstantiate = true;
-            Debug.Log("Hole Creation " + canInstantiate);
-            posXVal += 20f;
+            posXVal += 30f;
+            rightSpawn = true;
         }
     }
 }

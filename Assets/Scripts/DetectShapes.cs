@@ -3,20 +3,19 @@ using UnityEngine.UI;
 public class DetectShapes : MonoBehaviour
 {
     private float iniScaleX;
-    public int sliderVal;
+    public float sliderVal;
     public Slider slider;
+    public Text text;
     public float fillSpeed;
+    private int score = 1;
     private void Start()
     {
         iniScaleX = transform.localScale.x;
+        text.text = "Level " + score.ToString();
     }
-
     private void Update()
     {
-        if (slider.value < sliderVal)
-        {
-            slider.value = sliderVal * fillSpeed * Time.deltaTime;
-        }
+        slider.value = sliderVal;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -24,13 +23,19 @@ public class DetectShapes : MonoBehaviour
         {
             IncShapeVol(other);
             Destroy(other.gameObject);
-            sliderVal += 1;
+            sliderVal = slider.value + 1;
+            if (slider.value == 20)
+            {
+                score++;
+                sliderVal = 0;
+                text.text = "Level " + score.ToString();
+            }
         }
         else if(other.gameObject.CompareTag("EnemyShape"))
         {
             DecShapeVol(other);
             Destroy(other.gameObject);
-            if(slider.value > 1) sliderVal = -1;
+            if(slider.value > 1) sliderVal = slider.value - 1;
         }
     }
 
