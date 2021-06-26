@@ -5,12 +5,13 @@ public class EnemyFollow : MonoBehaviour
 {
     private NavMeshAgent Mob;
     public GameObject Player;
+    public float enemySpeed = 1.5f;
 
-    private HoleCreation HCreate;
+    public float mobDistance = 20f;
+
     private void Start()
     {
-        HCreate = GameObject.FindGameObjectWithTag("HoleInstance").GetComponent<HoleCreation>();
-        Mob = GetComponent<NavMeshAgent>();
+        Mob = gameObject.GetComponent<NavMeshAgent>();
         Player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -18,12 +19,12 @@ public class EnemyFollow : MonoBehaviour
     {
         float distance = Vector3.Distance(Player.transform.position, transform.position);
 
-        if (distance < HCreate.modDistance)
+        if (distance < mobDistance)
         {
             Vector3 dirToPlayer = transform.position - Player.transform.position;
             Vector3 newPos = transform.position - dirToPlayer;
-
-            Mob.SetDestination(newPos);
+            Mob.speed = enemySpeed;
+            Mob.SetDestination(new Vector3(newPos.x, 0f, newPos.z));
         }
     }
 }

@@ -5,8 +5,19 @@ public class HoleMovement : MonoBehaviour
     public PolygonCollider2D Hole2dCollider;
     public PolygonCollider2D Ground2dCollider;
     public MeshCollider GeneratedMeshCollider;
-    float initalScale = 0.5f;
+    float initalScale = 1f;
     Mesh GenerateMesh;
+
+    private SpawnDetection shapeSpawn;
+
+    private void Start()
+    {
+        shapeSpawn = GameObject.FindGameObjectWithTag("Player").GetComponent<SpawnDetection>();
+    }
+    private void Update()
+    {
+        transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
+    }
     private void FixedUpdate()
     {
         if (transform.hasChanged == true)
@@ -28,7 +39,7 @@ public class HoleMovement : MonoBehaviour
             pointPosition[i] = Hole2dCollider.transform.TransformPoint(pointPosition[i]);
         }
 
-        Ground2dCollider.pathCount = 5;
+        Ground2dCollider.pathCount = 3;
         Ground2dCollider.SetPath(index + 1, pointPosition);
     }
 

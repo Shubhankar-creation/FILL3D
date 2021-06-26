@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -22,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         meshRenderer.material = playerColor[currInd];
 
-        StartCoroutine(waitTOChangeColor());
+        //StartCoroutine(waitTOChangeColor());              To change color of playe over time
     }
     private void FixedUpdate()
     {

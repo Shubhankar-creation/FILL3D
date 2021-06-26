@@ -10,9 +10,16 @@ TagManager:
   - SpawnCollider
   - FrontSpawn
   - LeftSpawn
-  - BackSpawn
   - RightSpawn
   - Ground
+  - Shapes
+  - Mesh3D
+  - Coll2dTo3d
+  - Hole2d
+  - HoleParent
+  - HoleDelete
+  - Ground2D
+  - 3Dcollider
   layers:
   - Default
   - TransparentFX
@@ -21,8 +28,8 @@ TagManager:
   - Water
   - UI
   - Hole
-  - 
-  - 
+  - Shape
+  - DestroyGOs
   - 
   - 
   - 

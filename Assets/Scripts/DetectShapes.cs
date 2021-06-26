@@ -27,7 +27,7 @@ public class DetectShapes : MonoBehaviour
     void IncShapeVol(Collider incShape)
     {
         transform.localScale = transform.localScale + 
-            new Vector3(incShape.transform.localScale.x, 0f, incShape.transform.localScale.z);
+            new Vector3(incShape.transform.localScale.x / 4, 0f, incShape.transform.localScale.z / 4);
     }
 
     // Decreases the volume of the Player after collision with Enemy Shape
@@ -36,7 +36,7 @@ public class DetectShapes : MonoBehaviour
         if(iniScaleX != transform.localScale.x)
         {
             transform.localScale = transform.localScale -
-                    new Vector3(decShape.transform.localScale.x, 0f, decShape.transform.localScale.z);
+                    new Vector3(decShape.transform.localScale.x / 4, 0f, decShape.transform.localScale.z / 4);
         }
         else
         {
